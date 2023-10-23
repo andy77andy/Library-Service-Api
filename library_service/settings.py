@@ -136,12 +136,13 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# API_TOKEN = os.getenv("API_TOKEN")
-# CHAT_ID = os.getenv("CHAT_ID")
-#
-# STRIPE_PUBLIC_KEY = ""
-# STRIPE_SECRET_KEY = ""
-# STRIPE_WEBHOOK_KEY = ""
+
+API_TOKEN = os.getenv("API_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
+
+STRIPE_PUBLIC_KEY = ""
+STRIPE_SECRET_KEY = ""
+STRIPE_WEBHOOK_KEY = ""
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
@@ -154,30 +155,32 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
-# SIMPLE_JWT = {
-#     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=2400),
-#     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
-#     "ROTATE_REFRESH_TOKENS": True,
-# }
 
-# CELERY_BROKER_URL = "amqp://localhost:5672"
-# CELERY_RESULT_BACKEND = "rpc://localhost:5672"
-# CELERY_TIMEZONE = "Europe/Kyiv"
-# CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
-# CELERY_TASK_TRACK_STARTED = True
-# CELERY_TASK_TIME_LIMIT = 30 * 60
-#
-# AUTH_HEADER_NAME = "HTTP_X_ACCESS_TOKEN"
-#
-# SPECTACULAR_SETTINGS = {
-#     "TITLE": "LIBRARY_SERVICE",
-#     "DESCRIPTION": "Creating social_media_api app for easy use and managing",
-#     "VERSION": "1.0.0",
-#     "SERVE_INCLUDE_SCHEMA": False,
-#     "SWAGGER_UI_SETTINGS": {
-#         "deepLinking": True,
-#         "defaultModelRendering": "model",
-#         "defaultModelsExpandDepth": 2,
-#         "defaultModelExpandDepth": 2,
-#     },
-# }
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=2400),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+}
+
+CELERY_BROKER_URL = "amqp://localhost:5672"
+CELERY_RESULT_BACKEND = "rpc://localhost:5672"
+CELERY_TIMEZONE = "Europe/Kyiv"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+AUTH_HEADER_NAME = "HTTP_X_ACCESS_TOKEN"
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "LIBRARY_SERVICE",
+    "DESCRIPTION": "Creating social_media_api app for easy use and managing",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "defaultModelRendering": "model",
+        "defaultModelsExpandDepth": 2,
+        "defaultModelExpandDepth": 2,
+    },
+}
