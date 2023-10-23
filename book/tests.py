@@ -33,10 +33,10 @@ class BookUnAuthApiTest(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-    def test_forbidden_unauth(self):
+    def test_can_access_book_list(self):
         sample_book()
         response = self.client.get(BOOK_URL)
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 class BookNotAdminApiTest(TestCase):
