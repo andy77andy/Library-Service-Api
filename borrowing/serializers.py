@@ -5,10 +5,12 @@ from rest_framework import serializers
 
 from borrowing.bot import send_telegram_notification
 from borrowing.models import Borrowing, Payment
+from user.serializers import UserBorrowingSerializer
 
 
 class BorrowingSerializer(serializers.ModelSerializer):
     is_active = serializers.SerializerMethodField(read_only=True)
+    book = serializers.SlugRelatedField(slug_field="title", read_only=True)
 
     class Meta:
         model = Borrowing
@@ -28,6 +30,8 @@ class BorrowingSerializer(serializers.ModelSerializer):
 
 class BorrowingDetailSerializer(serializers.ModelSerializer):
     is_active = serializers.SerializerMethodField(read_only=True)
+    book = serializers.SlugRelatedField(slug_field="title", read_only=True)
+    user = UserBorrowingSerializer()
 
     class Meta:
         model = Borrowing
@@ -98,3 +102,9 @@ class BorrowingReturnSerializer(serializers.ModelSerializer):
         model = Borrowing
         fields = ("actual_return_date",)
         read_only_fields = ("actual_return_date",)
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payment
+        fields = "__all__"
