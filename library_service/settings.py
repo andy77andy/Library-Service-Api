@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "book",
     "library_service",
-    "payment",
     "borrowing",
     "user",
     "stripe",
