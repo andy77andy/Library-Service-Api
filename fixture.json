@@ -1,0 +1,59 @@
+[
+{
+  "model": "user.user",
+  "pk": 2,
+  "fields": {
+    "password": "test1234",
+    "is_superuser": true,
+    "first_name": "Admin",
+    "last_name": "Admin",
+    "is_staff": true,
+    "email": "admin@example.com"
+  }
+},
+{
+  "model": "user.user",
+  "pk": 3,
+  "fields": {
+    "password": "test2345",
+    "is_superuser": false,
+    "first_name": "Test",
+    "last_name": "Test",
+    "is_staff": false,
+    "email": "user@example.com"
+  }
+},
+{
+    "model": "book.book",
+    "pk": 1,
+    "fields": {
+        "title": "The Handmaid's Tale",
+        "author": "Margaret Atwood",
+        "cover": 1,
+        "inventory": 9,
+        "daily_fee": "0.10"
+    }
+},
+{
+    "model": "book.book",
+    "pk": 12,
+    "fields": {
+        "title": "Roberto Bolano",
+        "author": "2666",
+        "cover": 2,
+        "inventory": 20,
+        "daily_fee": "0.47"
+    }
+},
+{
+    "model": "borrowing.borrowing",
+    "pk": 15,
+    "fields": {
+        "borrow_date": "2023-07-05",
+        "expected_return_date": "2023-07-12",
+        "actual_return_date": null,
+        "book": 1,
+        "user": 2
+    }
+}
+]
