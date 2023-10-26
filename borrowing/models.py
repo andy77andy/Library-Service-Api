@@ -1,9 +1,5 @@
 import datetime
-import decimal
 
-# from datetime import datetime, timedelta
-
-from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -29,13 +25,6 @@ class Borrowing(models.Model):
     def is_active(self) -> bool:
         return self.actual_return_date is None
 
-    # @property
-    # def total_amount(self) -> int:
-    #     total_amount = 100 * (
-    #         self.actual_return_date - self.borrow_date
-    #     ).days * self.book.daily_fee
-    #     return int(total_amount)
-
     @property
     def total_amount(self) -> int:
         self.actual_return_date = datetime.date.today()
@@ -53,24 +42,6 @@ class Borrowing(models.Model):
                 )
                 total_amount += penalty_amount
         return int(total_amount)
-
-    # def full_clean(self, exclude=None, validate_unique=True):
-    #     if self.expected_return_date <= self.borrow_date:
-    #         raise ValidationError({'expected_return_date': 'Expected return date must be greater than borrow date.'})
-    #     if self.actual_return_date:
-    #         if self.actual_return_date <= self.borrow_date:
-    #             raise ValidationError({'actual_return_date': 'Expected return date must be greater than borrow date.'})
-    #     super().full_clean()
-    #
-    # def save(
-    #     self, force_insert=False, force_update=False, using=None, update_fields=None
-    # ):
-    #     self.full_clean()
-    #     # self.book.inventory -= 1
-    #     # self.book.save()
-    #     return super(Borrowing, self).save(
-    #         force_insert, force_update, using, update_fields
-    #     )
 
     class Meta:
         ordering = [

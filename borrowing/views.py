@@ -8,7 +8,6 @@ from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets, mixins, status
 from rest_framework.decorators import action
-from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
@@ -19,19 +18,18 @@ from borrowing.serializers import (
     BorrowingCreateSerializer,
     BorrowingDetailSerializer,
     BorrowingReturnSerializer,
+    PaymentSerializer,
 )
 from borrowing.session import CreateSession
-from payment.serializer import PaymentSerializer
-from permissions import IsAdminOrForbidden, IsAdminOrReadOnly
+from permissions import IsAdminOrReadOnly
 
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 
 class BorrowingViewSet(viewsets.ModelViewSet):
-    queryset = Borrowing.objects.all()
-    # select_related(
-    #     "book", "user")
-    # )
+    queryset = Borrowing.objects.all().select_related(
+        "book", "user"
+    )
     permission_classes = [IsAuthenticated]
     serializer_class = BorrowingSerializer
 
@@ -44,7 +42,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
         url_name="return",
         url_path="return",
         permission_classes=[
-            IsAdminOrForbidden,
+            IsAdminOrReadOnly,
         ],
     )
     @transaction.atomic
@@ -138,9 +136,6 @@ class PaymentViewSet(
     )
     def success_payment(self, request, pk=None):
         """Change payment status for success"""
-        # payment = get_object_or_404(Payment, pk=pk)
-        # session = stripe.checkout.Session.retrieve(payment.session_id)
-        # if session.payment_status == "paid":
         session_id = self.request.query_params.get("session_id")
         payment = Payment.objects.filter(session_id=session_id)
         serializer = PaymentSerializer(payment, data={"status": "PAID"}, partial=True)

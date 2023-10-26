@@ -1,8 +1,4 @@
-import decimal
 import os
-import time
-import logging
-from datetime import datetime
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.dispatcher import filters
@@ -33,17 +29,6 @@ async def send_notification(message: types.Message) -> None:
     chat_id = message.chat.id
     notification_text = f"Hi, {user_username}\n"
     await bot.send_message(chat_id=chat_id, text=notification_text)
-
-
-# @dp.message_handler(filters.Text(contains="book"))
-# async def send_notification(message: types.Message, borrowing: Borrowing) -> None:
-#     user_username = message.from_user.username
-#     notification_text = (
-#                          f"Borrow date: {datetime.now()}\n"
-#                          f"Expected return date: {expected_return_date}\n"
-#                          f"Book daily fee: {book_daily_fee}\n"
-#                          f"Book: {book}")
-#     await bot.send_message(chat_id=os.environ.get("CHAT_ID"), text=notification_text)
 
 
 if __name__ == "__main__":

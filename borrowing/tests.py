@@ -8,7 +8,6 @@ from rest_framework import status
 from rest_framework.test import APIClient
 
 from book.models import Book
-from book.serializers import BookSerializer
 from borrowing.models import Borrowing, Payment
 from borrowing.serializers import BorrowingSerializer, BorrowingReturnSerializer
 
@@ -37,15 +36,6 @@ def sample_book(**params):
     return Book.objects.create(**defaults)
 
 
-# def sample_user(**params):
-#     defaults = {
-#         "email": "test@test.com",
-#         "password": "test123456",
-#     }
-#     defaults.update(params)
-#
-#     return get_user_model().objects.create_user(**defaults)
-#
 def sample_borrowing(**params):
     defaults = {
         "borrow_date": date.today(),
@@ -95,14 +85,12 @@ class AuthenticatedBorrowingTest(TestCase):
             expected_return_date=datetime.date.today() + timedelta(5),
             book=book,
             user=self.user,
-            # actual_return=datetime.date(2023, 10, 10),
         )
         self.borrowing3 = Borrowing.objects.create(
             borrow_date=datetime.date.today(),
             expected_return_date=datetime.date.today() + timedelta(5),
             book=book,
             user=admin,
-            # actual_return=datetime.date(2023, 10, 10),
         )
 
     def test_list_borrowings(self):
