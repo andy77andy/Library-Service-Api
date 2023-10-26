@@ -15,10 +15,14 @@ def overdue_borrowings_task() -> None:
         expected_return_date__lte=tomorrow, actual_return_date=None
     )
 
-    for borrowing in overdue_borrowings:
-        message = (
-            f"Overdue borrowing:\n"
-            f"User: {borrowing.user.email}\n"
-            f"Book: {borrowing.book.title}"
-        )
-        send_telegram_notification(message)
+    if overdue_borrowings:
+        for borrowing in overdue_borrowings:
+            message = (
+                f"Overdue borrowing:\n"
+                f"User: {borrowing.user.email}\n"
+                f"Book: {borrowing.book.title}"
+            )
+            send_telegram_notification(message)
+
+    message = "everything is ok, we haven't expired borrowings"
+    send_telegram_notification(message)
