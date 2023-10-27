@@ -13,8 +13,8 @@ Python3 must be already installed
 ```python
 git clone https://github.com/andy77andy/Library-Service-Api
 cd library_service
-pythone -m venv venv 
-source venv/bin/activate
+python -m venv venv 
+source venv/bin/activate(source venv/Scripts/activate for Windows)
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
